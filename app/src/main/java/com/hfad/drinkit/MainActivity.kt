@@ -9,7 +9,7 @@ class MainActivity : AppCompatActivity() {
     private val JUICE_STATE="JUICE_STATE"
     private val JUICE_SIZE="JUICE_SIZE"
     private val SQUEEZE_COUNT="SQUEEZE_COUNT"
-    private val SELECE="select"
+    private val SELECT="select"
     private val SQUEEZE="squeeze"
     private val DRINK="drink"
     private val RESTART="restart"
@@ -25,39 +25,47 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState!=null){
             juiceState=savedInstanceState.getString("JUICE_STATE", "select")
             juiceSize=savedInstanceState.getInt("JUICE_SIZE", -1)
-            squeezeCount=savedInstanceState.getInt(SQUEEZE_COUNT, -1)
-        }
+            squeezeCount=savedInstanceState.getInt(SQUEEZE_COUNT, -1)  }
         juiceImage= findViewById(R.id.image_juice_state)
         setViewElement()
-        juiceImage!!.setOnClickListener{
-            clickJuiceImage()
-        }
-        juiceImage!!.setOnLongClickListener {
-            showSnackbar()
-        }
-    }
-
+        juiceImage!!.setOnClickListener{  clickJuiceImage()   }
+        juiceImage!!.setOnLongClickListener {  showSnackbar()  } }
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putString(JUICE_STATE, juiceState)
         outState.putInt(JUICE_SIZE, juiceSize)
         outState.putInt(SQUEEZE_COUNT, squeezeCount)
         super.onSaveInstanceState(outState)   }
     private fun showSnackbar(): Boolean{
-        if (juiceState!=SQUEEZE){
-            return false
-        }
+        if (juiceState!=SQUEEZE){ return false }
         val squeezeText=getString(R.string.squeeze_count, squeezeCount)
         Snackbar.make(
             findViewById(R.id.constraint_Layout),
-            squeezeText,
-            Snackbar.LENGTH_SHORT
-        ).show()
-        return true
-    }
+            squeezeText, Snackbar.LENGTH_SHORT ).show()
+        return true}
 
     private fun clickJuiceImage() {
-        TODO("Not yet implemented")
+    if(juiceState==SELECT){
+           juiceState=SQUEEZE
+        juiceSize=juiceTree.pick()
+        squeezeCount=0
+       }
+        else if (juiceState==SQUEEZE)
+    {
+            squeezeCount++
+        juiceSize--
+        if (juiceSize==0){
+            juiceState=DRINK
+            juiceSize=-1
+        }
     }
+        else if (juiceState==DRINK){
+            juiceState=RESTART
+    }
+        else if(juiceState==RESTART){
+        juiceState=SELECT
+    }
+        setViewElement()
+ }
 
     private fun setViewElement() {
         TODO("Not yet implemented")
@@ -65,6 +73,7 @@ class MainActivity : AppCompatActivity() {
 }
 class JuiceTree {
 fun pick(): Int{
+
     return (2..6).random()
 }
 }
