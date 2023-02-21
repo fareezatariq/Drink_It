@@ -36,6 +36,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putString(JUICE_STATE, juiceState)
+        outState.putInt(JUICE_SIZE, juiceSize)
+        outState.putInt(SQUEEZE_COUNT, squeezeCount)
+        super.onSaveInstanceState(outState)
+    }
     private fun showSnackbar(): Boolean{
         TODO("Not yet implemented")
     }
