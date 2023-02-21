@@ -3,6 +3,7 @@ package com.hfad.drinkit
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.TextView
 import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
@@ -68,7 +69,29 @@ class MainActivity : AppCompatActivity() {
  }
 
     private fun setViewElement() {
-        TODO("Not yet implemented")
+// TODO: set up a conditional that tracks the lemonadeState
+        // TODO: for each state, the textAction TextView should be set to the corresponding string from
+        //  the string resources file. The strings are named to match the state
+        // TODO: Additionally, for each state, the lemonImage should be set to the corresponding
+        //  drawable from the drawable resources. The drawables have the same names as the strings
+        //  but remember that they are drawables, not strings.
+        val textAction: TextView=findViewById(R.id.Text_action)
+        if (juiceState==SELECT){
+            textAction.setText(R.string.juice_select)
+            juiceImage?.setImageResource(R.drawable.lemon_tree)
+        }
+        if (juiceState==SQUEEZE){
+            textAction.setText(R.string.juice_squeeze)
+        juiceImage?.setImageResource(R.drawable.lemon_squeeze)
+        }
+        if (juiceState==DRINK){
+            textAction.setText(R.string.juice_drink)
+            juiceImage?.setImageResource(R.drawable.lemon_drink)
+        }
+        if (juiceState==RESTART){
+            textAction.setText(R.string.juice_empty_glass)
+            juiceImage?.setImageResource(R.drawable.lemon_restart)
+        }
     }
 }
 class JuiceTree {
