@@ -3,6 +3,7 @@ package com.hfad.drinkit
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
     private val JUICE_STATE="JUICE_STATE"
@@ -40,10 +41,18 @@ class MainActivity : AppCompatActivity() {
         outState.putString(JUICE_STATE, juiceState)
         outState.putInt(JUICE_SIZE, juiceSize)
         outState.putInt(SQUEEZE_COUNT, squeezeCount)
-        super.onSaveInstanceState(outState)
-    }
+        super.onSaveInstanceState(outState)   }
     private fun showSnackbar(): Boolean{
-        TODO("Not yet implemented")
+        if (juiceState!=SQUEEZE){
+            return false
+        }
+        val squeezeText=getString(R.string.squeeze_count, squeezeCount)
+        Snackbar.make(
+            findViewById(R.id.constraint_Layout),
+            squeezeText,
+            Snackbar.LENGTH_SHORT
+        ).show()
+        return true
     }
 
     private fun clickJuiceImage() {
