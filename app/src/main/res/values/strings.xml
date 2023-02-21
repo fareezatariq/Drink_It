@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Drink It</string>
+    <string name="juice_select">Click to select an Orange!</string>
+    <string name="juice_squeeze">Click to juice the Orange!</string>
+    <string name="juice_drink">Click to drink your Orange Juice!</string>
+    <string name="juice_empty_glass">Click to Drink again!</string>
+    <string name="squeeze_count">Squeeze count: %1$d, keep squeezing!</string>
+</resources>
